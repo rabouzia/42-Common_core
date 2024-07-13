@@ -6,7 +6,7 @@
 /*   By: ramzerk <ramzerk@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/27 00:07:27 by ramzerk           #+#    #+#             */
-/*   Updated: 2024/05/20 21:04:12 by ramzerk          ###   ########.fr       */
+/*   Updated: 2024/07/10 13:24:17 by ramzerk          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,11 +20,18 @@
 #include <sys/time.h>    // Pour gettimeofday
 #include <pthread.h>     // Pour pthread_create, pthread_detach, pthread_join, pthread_mutex_init, pthread_mutex_destroy, pthread_mutex_lock, pthread_mutex_unlock
 
-typedef struct s_mutex
-{
-	pthread_mutex_t mutex;
-	
-} mutex;
+#define FIRST 1
+#define SECOND 2
+#define FORK "has taken a fork"
+#define THINK "is thinking"
+#define EAT "is eating"
+#define SLEEP "is sleeping"
+#define DIED "died"
+
+
+
+
+typedef pthread_mutex_t t_mutex;
 
 
 #endif

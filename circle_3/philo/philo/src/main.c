@@ -6,74 +6,11 @@
 /*   By: ramzerk <ramzerk@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/27 00:07:15 by ramzerk           #+#    #+#             */
-/*   Updated: 2024/07/08 17:47:37 by ramzerk          ###   ########.fr       */
+/*   Updated: 2024/07/11 02:11:43 by ramzerk          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
-
-// int is_alpha(char c)
-// {
-// 	if (c >= '0' && c <= '9')
-// 		return 1;
-// 	return 0;
-// }
-
-// in    ßet	is_valid(char *str)
-// {
-// 	int	(i) = 0;
-// 	while(str[i])
-// 	{
-// 		if(!(is_alpha(str[i])))
-// 			return 0;
-// 		i++;
-// 	}
-// 	return (1);
-// }
-
-// int valid_arg(char **av)
-// {
-// 	int(i) = 0;
-// 	while (*av)
-// 	{
-// 		if (!is_valid(av))
-// 			return 0;
-// 		av++;
-// 	}
-// 	return 1;
-// }
-
-
-// int main (int ac, char **av)
-// {
-// 	if (ac != 5 || ac != 6)
-// 		return 0;
-// 	if (!valid_arg(av + 1))
-// 		return 0;	
-// }
-
-#include <pthread.h> 
-#include <stdio.h> 
-#include <stdlib.h> 
-#include <string.h> 
-#include <unistd.h> 
-  
-// pthread_t tid[2]; 
-// int counter; 
-  
-// void* trythis(void) 
-// { 
-//     unsigned long i = 0; 
-//     counter += 1; 
-//     printf("\n Job %d has started\n", counter); 
-  
-//     for (i = 0; i < (0xFFFFFFFF); i++)
-//    	 printf("\n Job %d has finished\n", counter); 
-  
-//     return NULL; 
-// } 
-
-// int pthread_mutex_init;
 
 int	ft_isdigit(int c)
 {
@@ -120,29 +57,45 @@ int check_av(char **av)
 	}
 	return 1;
 }
-
-int main(int ac, char **av) 
-{ 
-    // int i = 0; 
-    // int error; 
-  
-	if (ac == 5 || ac == 6)
-	{
-		if(!check_av(av))
-			return 0;
-	}
-	// 	while (i < 2) { 
-	// 		error = pthread_create(&(tid[i]), NULL, &trythis, NULL); 
-	// 		if (error != 0) 
-	// 			printf("\nThread can't be created : [%s]", strerror(error)); 
-	// 		i++; 
-	// 	} 
+pthread_mutex_t mutex;
+int mail =0;
+	// if (ac == 5 || ac == 6)
+	// {
+	// 	if(!check_av(av))
+	// 		return 0;
 	// }
-  
-    // pthread_join(tid[0], NULL); 
-    // pthread_join(tid[1], NULL); 
-  
-    return 0; 
+void * routine()
+{
+	for(int i = 0; i < 10000000; i++)
+	{
+		pthread_mutex_lock(&mutex);
+		mail++;
+		pthread_mutex_unlock(&mutex);
+	}
+}
+
+int main(void)//int ac, char **av) 
+{ 
+	pthread_t p1, p2, p3, p4;
+	pthread_mutex_init(&mutex, NULL);
+	if (pthread_create(&p1, NULL, &routine, NULL) != 0)
+		return 1;
+	if (pthread_create(&p2, NULL, &routine, NULL) != 0)
+		return 2;
+	if (pthread_create(&p3, NULL, &routine, NULL) != 0)
+		return 1;
+	if (pthread_create(&p4, NULL, &routine, NULL) != 0)
+		return 2;
+	if (pthread_join(p1,NULL) != 0)
+		return 3;
+	if (pthread_join(p2, NULL) != 0)
+		return 4;
+	if (pthread_join(p3,NULL) != 0)
+		return 3;
+	if (pthread_join(p4, NULL) != 0)
+		return 4;
+	printf("mails = %d", mail);
+	pthread_mutex_destroy(&mutex);
 } 
 
 /*
