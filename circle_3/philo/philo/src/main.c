@@ -6,51 +6,35 @@
 /*   By: ramzerk <ramzerk@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/27 00:07:15 by ramzerk           #+#    #+#             */
-/*   Updated: 2024/07/13 15:31:47 by ramzerk          ###   ########.fr       */
+/*   Updated: 2024/07/13 17:25:19 by ramzerk          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-pthread_mutex_t mutex;
-int mail =0;
-	// if (ac == 5 || ac == 6)
-	// {
-	// 	if(!check_av(av))
-	// 		return 0;
-	// }
-// void * routine()
-// {
-// 	for(int i = 0; i < 10000000; i++)
-// 	{
-// 		pthread_mutex_lock(&mutex);
-// 		mail++;
-// 		pthread_mutex_unlock(&mutex);
-// 	}
-// }
 
-int main(void)//int ac, char **av) 
+void init_philo(char **av, t_philo *philo)
+{
+	philo-> = ft_atoi(av[0]); // number_of_philosophers:
+	philo-> = ft_atoi(av[1]); // time_to_die
+	philo-> = ft_atoi(av[2]); // time_to_eat
+	philo-> = ft_atoi(av[3]); // time_to_sleep
+	philo-> = ft_atoi(av[4]); // number_of_times_each_philosopher_must_eat
+}
+
+int main(int ac, char **av) 
 { 
-	// pthread_t p1, p2, p3, p4;
-	// pthread_mutex_init(&mutex, NULL);
-	// if (pthread_create(&p1, NULL, &routine, NULL) != 0)
-	// 	return 1;
-	// if (pthread_create(&p2, NULL, &routine, NULL) != 0)
-	// 	return 2;
-	// if (pthread_create(&p3, NULL, &routine, NULL) != 0)
-	// 	return 1;
-	// if (pthread_create(&p4, NULL, &routine, NULL) != 0)
-	// 	return 2;
-	// if (pthread_join(p1,NULL) != 0)
-	// 	return 3;
-	// if (pthread_join(p2, NULL) != 0)
-	// 	return 4;
-	// if (pthread_join(p3,NULL) != 0)
-	// 	return 3;
-	// if (pthread_join(p4, NULL) != 0)
-	// 	return 4;
-	// printf("mails = %d", mail);
-	// pthread_mutex_destroy(&mutex);
+	t_philo philo;
+	t_data data;
+	if (ac == 5 || ac == 6)
+	{
+		if (!check_av(av + 1))
+			return 0;
+		init_args(av + 1);
+		printf("asds\n");
+		return 0;
+	}	
+	write(2, "Error\nWrong number of arguments\n", 32);
 	return 0;
 } 
 

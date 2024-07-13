@@ -6,7 +6,7 @@
 /*   By: ramzerk <ramzerk@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/27 00:07:27 by ramzerk           #+#    #+#             */
-/*   Updated: 2024/07/13 14:32:20 by ramzerk          ###   ########.fr       */
+/*   Updated: 2024/07/13 18:10:24 by ramzerk          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,9 +27,28 @@
 #define EAT "is eating"
 #define SLEEP "is sleeping"
 #define DIED "died"
+#define 
 
-typedef pthread_mutex_t t_mutex;
+// typedef  t_mutex;
+
+typedef struct s_philo {
+
+	int 			nb_philo;
+	int 			life_range;
+	int 			eat_time;
+	int 			sleep_time;
+	int 			must_eat;
+	pthread_t 		*philo;
+	pthread_mutex_t right_fork;
+	pthread_mutex_t left_fork;
+} t_philo;
+
 
 int check_av(char **av);
+
+//############# LIBFT #############/
+
+int	ft_isdigit(int c);
+int	ft_atoi(char *str);
 
 #endif

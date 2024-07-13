@@ -6,44 +6,13 @@
 /*   By: ramzerk <ramzerk@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/13 14:31:11 by ramzerk           #+#    #+#             */
-/*   Updated: 2024/07/13 14:31:23 by ramzerk          ###   ########.fr       */
+/*   Updated: 2024/07/13 17:56:12 by ramzerk          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-int	ft_isdigit(int c)
-{
-	if ((c >= '0') && (c <= '9'))
-		return (1);
-	return (0);
-}
 
-int	ft_atoi(const char *str)
-{
-	int	i;
-	int	p;
-	int	n;
-
-	i = 0;
-	p = 1;
-	n = 0;
-	while (str[i] == ' ' || str[i] == '\n' || str[i] == '\t' || str[i] == '\v'
-		|| str[i] == '\f' || str[i] == '\r')
-		i++;
-	if (str[i] == '-' || str[i] == '+')
-	{
-		if (str[i] == '-')
-			p *= -1;
-		i++;
-	}
-	while (str[i] >= 48 && str[i] <= 57)
-	{
-		n = n * 10 + (str[i] - 48);
-		i++;
-	}
-	return (n * p);
-}
 
 int check_av(char **av)
 {
@@ -56,4 +25,13 @@ int check_av(char **av)
 		i++;
 	}
 	return 1;
+}
+
+void init_philo(char **av, t_philo *philo)
+{
+	philo->nb_philo = ft_atoi(av[0]);   // number_of_philosophers:
+	philo->life_range = ft_atoi(av[1]); // time_to_die
+	philo->eat_time = ft_atoi(av[2]);   // time_to_eat
+	philo->sleep_time = ft_atoi(av[3]); // time_to_sleep
+	philo->must_eat = ft_atoi(av[4]);  // number_of_times_each_philosopher_must_eat
 }
