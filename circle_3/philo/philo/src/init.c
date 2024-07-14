@@ -6,7 +6,7 @@
 /*   By: rabouzia <rabouzia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/13 14:31:11 by ramzerk           #+#    #+#             */
-/*   Updated: 2024/07/14 18:43:55 by rabouzia         ###   ########.fr       */
+/*   Updated: 2024/07/14 20:28:21 by rabouzia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,8 @@ void	init_philo(char **av, t_philo *philo)
 	philo->life_range = ft_atoi(av[1]); // time_to_die
 	philo->eat_time = ft_atoi(av[2]);   // time_to_eat
 	philo->sleep_time = ft_atoi(av[3]); // time_to_sleep
-	philo->must_eat = ft_atoi(av[4]);   // number_of_times_each_philosopher_must_eat
+	philo->must_eat = ft_atoi(av[4]);
+	// number_of_times_each_philosopher_must_eat
 }
 
 t_philo	*ft_lstnew(int id)
@@ -69,7 +70,7 @@ void	ft_lstadd_back(t_philo **a, t_philo *new)
 	t_philo	*first;
 
 	if (!new)
-		return;
+		return ;
 	if (*a)
 	{
 		first = *a;
@@ -88,25 +89,31 @@ t_philo	init_chain(t_philo *philo)
 {
 	int		i;
 	t_philo	*tmp;
-	int tmp;
-	tmp = philo->nb_philo;
+	int		tmp_int;
+
 	i = 0;
+	tmp_int = philo->nb_philo;
 	tmp = philo;
+	tmp = ft_lstnew(i + 1);
+	philo = philo->next;
 	while (i < philo->nb_philo)
 	{
-		tmp = ft_lstnew(i + 1);
+		ft_lstadd_back(&tmp, ft_lstnew(i + 1));
 		i++;
 	}
 }
 
-void print_philo(t_philo *a)
+void	print_philo(t_philo *a)
 {
-	t_philo *first;
-	first = a;
+	t_philo	*first;
 
-	while(a)
+	first = a;
+	while (a)
 	{
-		printf("",philo->id)
+		printf("%d", a->id);
+		a = a->next;
+		if (a == first)
+			break ;
 	}
 }
 
