@@ -6,7 +6,7 @@
 /*   By: rabouzia <rabouzia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/27 00:07:27 by ramzerk           #+#    #+#             */
-/*   Updated: 2024/07/14 20:24:39 by rabouzia         ###   ########.fr       */
+/*   Updated: 2024/07/15 00:31:00 by rabouzia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,4 +67,9 @@ void				init_args(char *av, t_philo *philo);
 
 int					ft_isdigit(int c);
 int					ft_atoi(char *str);
+
+//############# Test ##############/
+
+void	print_philo(t_philo *a);
+
 #endif

@@ -6,7 +6,7 @@
 /*   By: rabouzia <rabouzia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/27 00:07:15 by ramzerk           #+#    #+#             */
-/*   Updated: 2024/07/14 17:53:55 by rabouzia         ###   ########.fr       */
+/*   Updated: 2024/07/15 00:55:26 by rabouzia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,15 +15,16 @@
 int	main(int ac, char **av)
 {
 	t_philo	philo;
-	t_data	data;
+	// t_data	data;
+	bzero(&philo, sizeof(t_philo));
+	
 
-	if (ac == 5 || ac == 6)
+	if (ac == 6 || ac == 7)
 	{
 		if (!check_av(av + 1))
 			return (0);
-		init_args(av + 1);
-		
-		printf(sizeof(short));
+		init_args(av + 1, &philo);
+		print_philo(&philo);
 		return (0);
 	}
 	write(2, "Error\nWrong number of arguments\n", 32);

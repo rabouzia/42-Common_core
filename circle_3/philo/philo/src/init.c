@@ -6,7 +6,7 @@
 /*   By: rabouzia <rabouzia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/13 14:31:11 by ramzerk           #+#    #+#             */
-/*   Updated: 2024/07/14 20:28:21 by rabouzia         ###   ########.fr       */
+/*   Updated: 2024/07/15 00:59:27 by rabouzia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,18 @@
 int	check_av(char **av)
 {
 	short	i;
-
+	short 	j;
+		
 	i = 0;
 	while (av[i])
 	{
-		if (!ft_isdigit(ft_atoi(av[i])))
-			return (0);
+	j = 0;
+		while (av[i][j])
+		{
+			if (!ft_isdigit(av[i][j]))
+				return (0);
+			j++;
+		}
 		i++;
 	}
 	return (1);
@@ -33,6 +39,7 @@ void	init_philo(char **av, t_philo *philo)
 	philo->eat_time = ft_atoi(av[2]);   // time_to_eat
 	philo->sleep_time = ft_atoi(av[3]); // time_to_sleep
 	philo->must_eat = ft_atoi(av[4]);
+	philo->next = NULL;
 	// number_of_times_each_philosopher_must_eat
 }
 
@@ -53,15 +60,15 @@ t_philo	*ft_lstlast(t_philo *lst)
 	t_philo	*head;
 
 	head = lst;
-	if (!lst)
+	if (!head)
 		return (0);
-	while (lst->next != NULL)
+	while (head)
 	{
-		lst = lst->next;
-		if (lst->next == head)
+		head = head->next;
+		if (lst == head)
 			break ;
 	}
-	return (lst);
+	return (head);
 }
 
 void	ft_lstadd_back(t_philo **a, t_philo *new)
@@ -74,8 +81,9 @@ void	ft_lstadd_back(t_philo **a, t_philo *new)
 	if (*a)
 	{
 		first = *a;
-		last = ft_lstlast(a);
+		last = ft_lstlast(*a);
 		new->next = first;
+		printf("\n\n%p\n\n\n", last->id);
 		last->next = new;
 	}
 	else
@@ -95,10 +103,13 @@ t_philo	init_chain(t_philo *philo)
 	tmp_int = philo->nb_philo;
 	tmp = philo;
 	tmp = ft_lstnew(i + 1);
+	
 	philo = philo->next;
-	while (i < philo->nb_philo)
+	while (i < tmp_int)
 	{
-		ft_lstadd_back(&tmp, ft_lstnew(i + 1));
+		ft_lstadd_back(&tmp, ft_lstnew(i));
+		tmp->id = i;
+		printf("i = %d, tmp_int = %d\n", i, tmp_int);
 		i++;
 	}
 }
@@ -110,7 +121,7 @@ void	print_philo(t_philo *a)
 	first = a;
 	while (a)
 	{
-		printf("%d", a->id);
+		printf("\nid is %d\n", a->id);
 		a = a->next;
 		if (a == first)
 			break ;
@@ -120,4 +131,5 @@ void	print_philo(t_philo *a)
 void	init_args(char *av, t_philo *philo)
 {
 	init_philo(av, philo);
+	init_chain(philo);
 }
