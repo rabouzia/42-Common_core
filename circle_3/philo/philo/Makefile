@@ -1,7 +1,8 @@
 NAME     =		philo
 
 SRC	     =		src/main.c	\
-			    src/check.c	
+			    src/libft.c	\
+				src/init.c
 
 CC       =	    cc
 
@@ -35,7 +36,7 @@ $(OBJ_DIR)%.o:  src/%.c
 
 clean:
 				@clear
-				@$(RM) $(OBJ_DIR)
+				@rm -rf $(OBJ_DIR)
 				@echo "\033[1;31m======== philo object files removed ========\033[0m"
 
 fclean:         clean
