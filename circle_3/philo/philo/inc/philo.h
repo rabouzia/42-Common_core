@@ -6,7 +6,7 @@
 /*   By: ramzerk <ramzerk@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/27 00:07:27 by ramzerk           #+#    #+#             */
-/*   Updated: 2024/07/13 18:10:24 by ramzerk          ###   ########.fr       */
+/*   Updated: 2024/07/14 13:57:50 by ramzerk          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,6 @@
 #define EAT "is eating"
 #define SLEEP "is sleeping"
 #define DIED "died"
-#define 
 
 // typedef  t_mutex;
 
