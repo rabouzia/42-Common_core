@@ -6,7 +6,7 @@
 /*   By: rabouzia <rabouzia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/13 14:31:11 by ramzerk           #+#    #+#             */
-/*   Updated: 2024/07/15 00:59:27 by rabouzia         ###   ########.fr       */
+/*   Updated: 2024/07/15 23:42:06 by rabouzia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,12 +15,12 @@
 int	check_av(char **av)
 {
 	short	i;
-	short 	j;
-		
+	short	j;
+
 	i = 0;
 	while (av[i])
 	{
-	j = 0;
+		j = 0;
 		while (av[i][j])
 		{
 			if (!ft_isdigit(av[i][j]))
@@ -32,15 +32,15 @@ int	check_av(char **av)
 	return (1);
 }
 
-void	init_philo(char **av, t_philo *philo)
+void	init_philo(int ac, char **av, t_philo *philo, t_data *data)
 {
-	philo->nb_philo = ft_atoi(av[0]);   // number_of_philosophers:
-	philo->life_range = ft_atoi(av[1]); // time_to_die
-	philo->eat_time = ft_atoi(av[2]);   // time_to_eat
-	philo->sleep_time = ft_atoi(av[3]); // time_to_sleep
-	philo->must_eat = ft_atoi(av[4]);
-	philo->next = NULL;
-	// number_of_times_each_philosopher_must_eat
+	(void)philo;
+	data->nb_philo = ft_atoi(av[0]);   // number_of_philosophers:
+	data->life_range = ft_atoi(av[1]); // time_to_die
+	data->eat_time = ft_atoi(av[2]);   // time_to_eat
+	data->sleep_time = ft_atoi(av[3]); // time_to_sleep
+	if (ac == 6)
+		data->must_eat = ft_atoi(av[4]);
 }
 
 t_philo	*ft_lstnew(int id)
@@ -51,7 +51,7 @@ t_philo	*ft_lstnew(int id)
 	if (!res)
 		return (NULL);
 	res->id = id;
-	res->next = res;
+	res->next = NULL;
 	return (res);
 }
 
@@ -71,48 +71,61 @@ t_philo	*ft_lstlast(t_philo *lst)
 	return (head);
 }
 
-void	ft_lstadd_back(t_philo **a, t_philo *new)
+void	id_print(t_philo *p)
 {
-	t_philo	*last;
-	t_philo	*first;
-
-	if (!new)
-		return ;
-	if (*a)
-	{
-		first = *a;
-		last = ft_lstlast(*a);
-		new->next = first;
-		printf("\n\n%p\n\n\n", last->id);
-		last->next = new;
-	}
+	if (p->id == 1)
+		printf("%s", P1);
+	if (p->id == 2)
+		printf("%s", P2);
+	if (p->id == 3)
+		printf("%s", P3);
+	if (p->id == 4)
+		printf("%s", P4);
+	if (p->id == 5)
+		printf("%s", P5);
+	if (p->id == 6)
+		printf("%s", P6);
+	if (p->id == 7)
+		printf("%s", P7);
+	if (p->id == 4)
+		printf("%s", P8);
+	if (p->id == 5)
+		printf("%s", P9);
+	if (p->id == 6)
+		printf("%s", P10);
 	else
-	{
-		*a = new;
-		new->next = new;
-	}
+		printf("%d", p->id);
 }
 
-t_philo	init_chain(t_philo *philo)
+void	ft_lstadd_back(t_philo **lst, t_philo *new)
 {
-	int		i;
-	t_philo	*tmp;
-	int		tmp_int;
-
-	i = 0;
-	tmp_int = philo->nb_philo;
-	tmp = philo;
-	tmp = ft_lstnew(i + 1);
-	
-	philo = philo->next;
-	while (i < tmp_int)
-	{
-		ft_lstadd_back(&tmp, ft_lstnew(i));
-		tmp->id = i;
-		printf("i = %d, tmp_int = %d\n", i, tmp_int);
-		i++;
-	}
+	if (!lst || !new)
+		return ;
+	if (*lst)
+		ft_lstlast(*lst)->next = new;
+	else
+		*lst = new;
 }
+
+// t_philo	init_chain(t_philo *philo)
+// {
+// 	int		i;
+// 	t_philo	*tmp;
+// 	int		tmp_int;
+
+// 	i = 0;
+// 	tmp_int = philo->nb_philo;
+// 	tmp = philo;
+// 	tmp = ft_lstnew(i + 1);
+// 	philo = philo->next;
+// 	while (i < tmp_int)
+// 	{
+// 		ft_lstadd_back(&tmp, ft_lstnew(i));
+// 		tmp->id = i;
+// 		printf("i = %d, tmp_int = %d\n", i, tmp_int);
+// 		i++;
+// 	}
+// }
 
 void	print_philo(t_philo *a)
 {
@@ -128,8 +141,8 @@ void	print_philo(t_philo *a)
 	}
 }
 
-void	init_args(char *av, t_philo *philo)
+void	init_args(int ac, char **av, t_philo *philo, t_data *data)
 {
-	init_philo(av, philo);
-	init_chain(philo);
+	init_philo(ac, av, philo, data);
+	// init_chain(philo);
 }

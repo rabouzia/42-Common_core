@@ -6,7 +6,7 @@
 /*   By: rabouzia <rabouzia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/27 00:07:15 by ramzerk           #+#    #+#             */
-/*   Updated: 2024/07/15 00:55:26 by rabouzia         ###   ########.fr       */
+/*   Updated: 2024/07/15 21:34:26 by rabouzia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,16 +14,16 @@
 
 int	main(int ac, char **av)
 {
+	t_data	data;
 	t_philo	philo;
-	// t_data	data;
-	bzero(&philo, sizeof(t_philo));
-	
 
-	if (ac == 6 || ac == 7)
+	bzero(&philo, sizeof(t_philo));
+	bzero(&data, sizeof(t_data));
+	if (ac == 5 || ac == 6)
 	{
 		if (!check_av(av + 1))
 			return (0);
-		init_args(av + 1, &philo);
+		init_args(ac, av + 1, &philo, &data);
 		print_philo(&philo);
 		return (0);
 	}

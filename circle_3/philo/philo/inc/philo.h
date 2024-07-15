@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: ramzerk <ramzerk@student.42.fr>            +#+  +:+       +#+        */
+/*   By: rabouzia <rabouzia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/27 00:07:27 by ramzerk           #+#    #+#             */
-/*   Updated: 2024/07/15 12:43:13 by ramzerk          ###   ########.fr       */
+/*   Updated: 2024/07/15 21:35:14 by rabouzia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,11 +41,6 @@
 
 typedef struct s_philo
 {
-	int				nb_philo;
-	int				life_range;
-	int				eat_time;
-	int				sleep_time;
-	int				must_eat;
 	int				id;
 	pthread_t		*philo;
 	struct s_philo	*next;
@@ -55,13 +50,17 @@ typedef struct s_philo
 
 typedef struct s_data
 {
-
+	int				nb_philo;
+	int				life_range;
+	int				eat_time;
+	int				sleep_time;
+	int				must_eat;
 }					t_data;
 
 //########### INIT & CHECK ########/
 
 int					check_av(char **av);
-void				init_args(char *av, t_philo *philo);
+void				init_args(int ac, char **av, t_philo *philo, t_data *data);
 
 //############# LIBFT #############/
 
@@ -70,6 +69,6 @@ int					ft_atoi(char *str);
 
 //############# Test ##############/
 
-void	print_philo(t_philo *a);
+void				print_philo(t_philo *a);
 
 #endif
