@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   philo.h                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rabouzia <rabouzia@student.42.fr>          +#+  +:+       +#+        */
+/*   By: ramzerk <ramzerk@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/27 00:07:27 by ramzerk           #+#    #+#             */
-/*   Updated: 2024/07/15 00:31:00 by rabouzia         ###   ########.fr       */
+/*   Updated: 2024/07/15 12:43:13 by ramzerk          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,16 +28,16 @@
 # define SLEEP "is sleeping"
 # define DIED "died"
 
-# define P_1 "Ibn Battuta"
-# define P_2 "Ibn Al-Khattab"
-# define P_3 "Ibn Omar"
-# define P_4 "Imam Malik"
-# define P_5 "Imam Bukhari"
-# define P_6 "Imam Muslim"
-# define P_7 "Imam Shafi3i"
-# define P_8 "Abou Houreyra"
-# define P_9 "Ibn Khaldoun"
-# define P_10 "Ibn Abbas"
+# define P1 "Ibn Battuta"
+# define P2 "Ibn Al-Khattab"
+# define P3 "Ibn Omar"
+# define P4 "Imam Malik"
+# define P5 "Imam Bukhari"
+# define P6 "Imam Muslim"
+# define P7 "Imam Shafi3i"
+# define P8 "Abou Houreyra"
+# define P9 "Ibn Khaldoun"
+# define P10 "Ibn Abbas"
 
 typedef struct s_philo
 {
