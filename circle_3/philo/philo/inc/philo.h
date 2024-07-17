@@ -6,13 +6,14 @@
 /*   By: rabouzia <rabouzia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/04/27 00:07:27 by ramzerk           #+#    #+#             */
-/*   Updated: 2024/07/15 21:35:14 by rabouzia         ###   ########.fr       */
+/*   Updated: 2024/07/17 18:31:12 by rabouzia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef PHILO_H
 # define PHILO_H
 
+# include "name.h"
 # include <pthread.h>
 # include <stdio.h>
 # include <stdlib.h>
@@ -28,16 +29,7 @@
 # define SLEEP "is sleeping"
 # define DIED "died"
 
-# define P1 "Ibn Battuta"
-# define P2 "Ibn Al-Khattab"
-# define P3 "Ibn Omar"
-# define P4 "Imam Malik"
-# define P5 "Imam Bukhari"
-# define P6 "Imam Muslim"
-# define P7 "Imam Shafi3i"
-# define P8 "Abou Houreyra"
-# define P9 "Ibn Khaldoun"
-# define P10 "Ibn Abbas"
+struct s_data;
 
 typedef struct s_philo
 {
@@ -46,6 +38,8 @@ typedef struct s_philo
 	struct s_philo	*next;
 	pthread_mutex_t	right_fork;
 	pthread_mutex_t	left_fork;
+	struct s_data	*data;
+
 }					t_philo;
 
 typedef struct s_data
@@ -60,7 +54,7 @@ typedef struct s_data
 //########### INIT & CHECK ########/
 
 int					check_av(char **av);
-void				init_args(int ac, char **av, t_philo *philo, t_data *data);
+void				init_args(int ac, char **av, t_philo **philo, t_data *data);
 
 //############# LIBFT #############/
 

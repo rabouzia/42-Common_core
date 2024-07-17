@@ -6,7 +6,7 @@
 /*   By: rabouzia <rabouzia@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/13 14:31:11 by ramzerk           #+#    #+#             */
-/*   Updated: 2024/07/15 23:42:06 by rabouzia         ###   ########.fr       */
+/*   Updated: 2024/07/17 18:23:56 by rabouzia         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,15 +32,15 @@ int	check_av(char **av)
 	return (1);
 }
 
-void	init_philo(int ac, char **av, t_philo *philo, t_data *data)
+t_data	*init_philo(int ac, char **av, t_data *data)
 {
-	(void)philo;
 	data->nb_philo = ft_atoi(av[0]);   // number_of_philosophers:
 	data->life_range = ft_atoi(av[1]); // time_to_die
 	data->eat_time = ft_atoi(av[2]);   // time_to_eat
 	data->sleep_time = ft_atoi(av[3]); // time_to_sleep
 	if (ac == 6)
 		data->must_eat = ft_atoi(av[4]);
+	return (data);
 }
 
 t_philo	*ft_lstnew(int id)
@@ -57,44 +57,37 @@ t_philo	*ft_lstnew(int id)
 
 t_philo	*ft_lstlast(t_philo *lst)
 {
-	t_philo	*head;
-
-	head = lst;
-	if (!head)
+	if (!lst)
 		return (0);
-	while (head)
-	{
-		head = head->next;
-		if (lst == head)
-			break ;
-	}
-	return (head);
+	while (lst->next != NULL)
+		lst = lst->next;
+	return (lst);
 }
 
 void	id_print(t_philo *p)
 {
 	if (p->id == 1)
-		printf("%s", P1);
-	if (p->id == 2)
-		printf("%s", P2);
-	if (p->id == 3)
-		printf("%s", P3);
-	if (p->id == 4)
-		printf("%s", P4);
-	if (p->id == 5)
-		printf("%s", P5);
-	if (p->id == 6)
-		printf("%s", P6);
-	if (p->id == 7)
-		printf("%s", P7);
-	if (p->id == 4)
-		printf("%s", P8);
-	if (p->id == 5)
-		printf("%s", P9);
-	if (p->id == 6)
-		printf("%s", P10);
+		printf("%s\n", P1);
+	else if (p->id == 2)
+		printf("%s\n", P2);
+	else if (p->id == 3)
+		printf("%s\n", P3);
+	else if (p->id == 4)
+		printf("%s\n", P4);
+	else if (p->id == 5)
+		printf("%s\n", P5);
+	else if (p->id == 6)
+		printf("%s\n", P6);
+	else if (p->id == 7)
+		printf("%s\n", P7);
+	else if (p->id == 8)
+		printf("%s\n", P8);
+	else if (p->id == 9)
+		printf("%s\n", P9);
+	else if (p->id == 10)
+		printf("%s\n", P10);
 	else
-		printf("%d", p->id);
+		printf("%d\n", p->id);
 }
 
 void	ft_lstadd_back(t_philo **lst, t_philo *new)
@@ -107,42 +100,41 @@ void	ft_lstadd_back(t_philo **lst, t_philo *new)
 		*lst = new;
 }
 
-// t_philo	init_chain(t_philo *philo)
-// {
-// 	int		i;
-// 	t_philo	*tmp;
-// 	int		tmp_int;
+t_philo	*init_chain(t_philo **philo, t_data *data)
+{
+	int		i;
+	t_philo	*tmp;
+	int		tmp_int;
 
-// 	i = 0;
-// 	tmp_int = philo->nb_philo;
-// 	tmp = philo;
-// 	tmp = ft_lstnew(i + 1);
-// 	philo = philo->next;
-// 	while (i < tmp_int)
-// 	{
-// 		ft_lstadd_back(&tmp, ft_lstnew(i));
-// 		tmp->id = i;
-// 		printf("i = %d, tmp_int = %d\n", i, tmp_int);
-// 		i++;
-// 	}
-// }
+	i = 0;
+	tmp_int = data->nb_philo;
+	tmp = ft_lstnew(++i);
+	*philo = tmp;
+	while (i < tmp_int)
+	{
+		ft_lstadd_back(&tmp, ft_lstnew(i + 1));
+		tmp->id = i;
+		// printf("i = %d, tmp_int = %d\n, tmp_ptr = %p his tmp->id= %d\n", i, tmp_int, tmp ,tmp->id);
+		tmp = tmp->next;
+		i++;
+	}
+	return (*philo);
+}
 
 void	print_philo(t_philo *a)
 {
-	t_philo	*first;
-
-	first = a;
+	printf("show id :\n");
 	while (a)
 	{
-		printf("\nid is %d\n", a->id);
+		id_print(a);
+		// printf("id = %d and ptr = %p\n", a->id, a);
 		a = a->next;
-		if (a == first)
-			break ;
 	}
 }
 
-void	init_args(int ac, char **av, t_philo *philo, t_data *data)
+void	init_args(int ac, char **av, t_philo **philo, t_data *data)
 {
-	init_philo(ac, av, philo, data);
-	// init_chain(philo);
+	data = init_philo(ac, av, data);
+	philo = init_chain(philo, data);
+	print_philo(philo);
 }
